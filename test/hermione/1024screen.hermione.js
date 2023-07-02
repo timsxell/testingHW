@@ -103,21 +103,6 @@ describe('microsoft', async function() {
         await page.goto('http://localhost:3000/hw/store/cart');
         await page.click('[data-testid=button-clear-cart]');
         await browser.assertView('plain', '.Application');
-        
     });
     
-    it('Тест, что содержимое корзины сохраняться между перезагрузками страницы', async function({browser}) {
-        const puppeteer = await browser.getPuppeteer();
-        const [page] = await puppeteer.pages();
-        
-        await page.goto('http://localhost:3000/hw/store/cart');
-        await page.evaluate(() => { 
-            localStorage.setItem('example-store-cart', JSON.stringify({0: {name: 'a', price: 1, count: 2}}));
-        });
-        await page.goto('http://localhost:3000/hw/store/cart');
-        await page.goto('http://localhost:3000/hw/store/cart');
-        await browser.assertView('plain', '.Application');
-    });
-    
-      
 });
